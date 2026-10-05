@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Dashboard | Campus Lost & Found{% endblock %}{% block content %}
+<section class="hero"><div><p class="eyebrow">Campus exchange board</p><h1>Give every item a way home.</h1><p>Report something missing, share what you found, and help classmates reconnect with their belongings.</p></div><div class="actions"><a class="button" href="{{ url_for('report_item', item_type='lost') }}">Report lost</a><a class="button coral" href="{{ url_for('report_item', item_type='found') }}">Report found</a></div></section>
+<div class="stats"><div class="stat"><strong>{{ totals.total or 0 }}</strong><span>Total reports</span></div><div class="stat"><strong>{{ totals.lost or 0 }}</strong><span>Lost items</span></div><div class="stat"><strong>{{ totals.found or 0 }}</strong><span>Found items</span></div><div class="stat"><strong>{{ totals.pending or 0 }}</strong><span>Pending claims</span></div></div>
+<div class="section-head"><h2>Quick actions</h2></div><div class="actions"><a class="button secondary" href="{{ url_for('search') }}">Search reports</a><a class="button secondary" href="{{ url_for('claims') }}">View my claims</a><a class="button secondary" href="{{ url_for('admin') }}">Open admin queue</a></div>
+<div class="section-head"><h2>Latest reports</h2><a href="{{ url_for('search') }}">Browse all</a></div>
+<div class="grid">{% for item in latest %}{% include '_item_card.html' %}{% else %}<div class="card empty">No reports yet. Start by adding a lost or found item.</div>{% endfor %}</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Campus Lost & Found{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('dashboard') }}"><span>LF</span> Campus Lost & Found</a>
+    <nav>
+      <a href="{{ url_for('search') }}">Browse</a>
+      <a href="{{ url_for('claims') }}">My claims</a>
+      <a class="nav-admin" href="{{ url_for('admin') }}">Admin</a>
+    </nav>
+  </header>
+  <main class="shell">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>Built for a more helpful campus community.</footer>
+</body>
+</html>
